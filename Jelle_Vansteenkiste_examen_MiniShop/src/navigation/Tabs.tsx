@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStack from "./HomeStack";
 import CartScreen from "../screens/CartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import { TabParamList } from "./types/TabParamList";
+import { TabParamList } from "./types";
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
