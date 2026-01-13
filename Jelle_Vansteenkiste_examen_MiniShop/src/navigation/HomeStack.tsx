@@ -1,7 +1,11 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProductListScreen from "../screens/ProductListScreen";
-import ProductDetailScreen from "../screens/ProductDetailScreen";
-import { HomeStackParamList } from "./types";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ProductListScreen from '../screens/ProductListScreen';
+import ProductDetailScreen from '../screens/ProductDetailScreen';
+
+export type HomeStackParamList = {
+  ProductList: undefined;
+  ProductDetail: { id: number };
+};
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 

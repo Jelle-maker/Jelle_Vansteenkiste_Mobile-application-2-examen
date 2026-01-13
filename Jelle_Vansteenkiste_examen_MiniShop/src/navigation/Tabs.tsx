@@ -1,12 +1,17 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeStack from "./HomeStack";
-import CartScreen from "../screens/CartScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import { TabParamList } from "./types";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeStack from './HomeStack';
+import CartScreen from '../screens/CartScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
-const Tab = createBottomTabNavigator<TabParamList>();
+export type RootTabParamList = {
+  Home: undefined;
+  Cart: undefined;
+  Profile: undefined;
+};
 
-export default function Tabs() {
+const Tab = createBottomTabNavigator<RootTabParamList>();
+
+export default function RootTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeStack} />
