@@ -1,56 +1,3 @@
-// import { View, Text, FlatList, ActivityIndicator } from 'react-native';
-// import { useQuery } from '@tanstack/react-query';
-// import { fetchProducts } from '../api/products';
-// import ProductCard from '../components/ProductCard';
-// import { NativeStackScreenProps } from '@react-navigation/native-stack';
-// import { HomeStackParamList } from '../navigation/HomeStack';
-// import { useContext } from 'react';
-// import { ThemeContext } from '../theme/theme';
-
-// type Props = NativeStackScreenProps<HomeStackParamList, 'ProductList'>;
-
-// export default function ProductListScreen({ navigation }: Props) {
-//   const { colors } = useContext(ThemeContext);
-
-//   const { data, isLoading, isError } = useQuery({
-//     queryKey: ['products'],
-//     queryFn: fetchProducts,
-//   });
-
-//   if (isLoading) {
-//     return (
-//       <View style={{ marginTop: 50 }}>
-//         <ActivityIndicator />
-//       </View>
-//     );
-//   }
-
-//   if (isError) {
-//     return <Text style={{ color: colors.text }}>Error loading products</Text>;
-//   }
-
-//   if (!data.products.length) {
-//     return <Text style={{ color: colors.muted }}>Geen producten</Text>;
-//   }
-
-//   return (
-//     <View style={{ flex: 1, backgroundColor: colors.background }}>
-//       <FlatList
-//         data={data.products}
-//         keyExtractor={(item) => item.id.toString()}
-//         renderItem={({ item }) => (
-//           <ProductCard
-//             product={item}
-//             onPress={() =>
-//               navigation.navigate('ProductDetail', { id: item.id })
-//             }
-//           />
-//         )}
-//       />
-//     </View>
-//   );
-// }
-
 import { View, Text, FlatList, TextInput, ActivityIndicator, StyleSheet } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProducts } from '../api/products';
@@ -72,7 +19,7 @@ export default function ProductListScreen({ navigation }: Props) {
 
   const [search, setSearch] = useState('');
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
-  
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (data?.products) {
