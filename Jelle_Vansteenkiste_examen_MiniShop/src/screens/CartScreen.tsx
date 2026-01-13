@@ -1,36 +1,33 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/Index';
+import { View, Text, Button, FlatList } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { increment, decrement, remove, selectSubtotal, selectTotalItems, } from '../redux/cartSlice';
 
 export default function CartScreen() {
+  const items = useSelector((state: any) => state.cart.items);
+  const total = useSelector(selectTotalItems);
+  const subtotal = useSelector(selectSubtotal);
+  const dispatch = useDispatch();
 
-  const cartItems = useSelector((state: RootState) => state.cart);
+  if (!items.length) return <Text>🛒 Cart is empty</Text>;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Your Cart</Text>
+    <View style={{ padding: 16 }}>
+      <Text>{total} items</Text>
+      <Text>Subtotal: €{subtotal}</Text>
 
-      {cartItems.length === 0 ? (
-        <Text style={styles.emptyText}>Cart is empty</Text>
-      ) : (
-        <FlatList
-          data={cartItems}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.item}>
-              <Text>Product ID: {item.id}</Text>
-            </View>
-          )}
-        />
-      )}
+      <FlatList
+        data={items}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item.title}</Text>
+            <Text>{item.quantity} x €{item.price}</Text>
+            <Button title="+" onPress={() => dispatch(increment(item.id))} />
+            <Button title="-" onPress={() => dispatch(decrement(item.id))} />
+            <Button title="Remove" onPress={() => dispatch(remove(item.id))} />
+          </View>
+        )}
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 16 },
-  emptyText: { fontSize: 16, color: '#888' },
-  item: { padding: 12, borderBottomWidth: 1, borderBottomColor: '#ccc' },
-});
