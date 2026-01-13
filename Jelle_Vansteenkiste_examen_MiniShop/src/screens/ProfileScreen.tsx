@@ -1,18 +1,19 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import { useSelector } from 'react-redux';
+import { selectSubtotal, selectTotalItems } from '../redux/cartSlice';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ProfileScreen() {
+  const total = useSelector(selectTotalItems);
+  const subtotal = useSelector(selectSubtotal);
+  const navigation = useNavigation<any>();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Profile</Text>
-      <Text style={styles.info}>Name: John Doe</Text>
-      <Text style={styles.info}>Email: john.doe@example.com</Text>
+    <View style={{ padding: 16 }}>
+      <Text>Profile: Jelle Vansteenkiste</Text>
+      <Text>Items in cart: {total}</Text>
+      <Text>Subtotal: €{subtotal}</Text>
+      <Button title="Go to Cart" onPress={() => navigation.navigate('Cart')} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, alignItems: 'center', justifyContent: 'center' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 16 },
-  info: { fontSize: 18, marginBottom: 8 },
-});
