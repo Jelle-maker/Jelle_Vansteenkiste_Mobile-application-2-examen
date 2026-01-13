@@ -9,14 +9,14 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
+            <ThemeProvider>
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
           <NavigationContainer>
             <RootTabs />
           </NavigationContainer>
-        </ThemeProvider>
       </QueryClientProvider>
     </Provider>
+    </ThemeProvider>
   );
 }
