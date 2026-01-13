@@ -14,7 +14,7 @@ export default function ProductListScreen({ navigation }: Props) {
   });
 
   if (isLoading) return <ActivityIndicator style={{ marginTop: 50 }} />;
-  if (isError) return <Text>❌ Error loading products</Text>;
+  if (isError) return <Text>Error loading products</Text>;
   if (!data.products.length) return <Text>Geen producten</Text>;
 
   return (
